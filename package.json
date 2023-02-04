@@ -1,0 +1,20 @@
+{
+  "name": "ts-satisfactory-plugin",
+  "version": "1.0.0",
+  "description": "TypeScript language plugin that satisfies you",
+  "main": "dist/index.cjs",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "typescript",
+    "plugin"
+  ],
+  "author": "uhyo <uhyo@uhy.ooo>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^18.11.18",
+    "typescript": "^5.0.0-beta"
+  }
+}
