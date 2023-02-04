@@ -23,15 +23,16 @@ export function getAdditionalInlays(
     if (!sat) {
       return [];
     }
-    const position = calcInlayPosition(ts, decl);
-    if (position === undefined) {
+    const res = calcInlayPosition(ts, decl);
+    if (res === undefined) {
       return [];
     }
+    const { position, leadingSpaces } = res;
     return [
       {
         kind: ts.InlayHintKind.Type,
         position,
-        text: "satisfies " + sat.getText(),
+        text: " ".repeat(leadingSpaces) + "satisfies " + sat.getText(),
         whitespaceAfter: true,
       },
     ];
@@ -86,7 +87,10 @@ function calcInlayPosition(
   function adjustPos(node: VariableDeclaration | VariableDeclarationList) {
     const triv = node.getLeadingTriviaWidth();
     if (triv === 0) {
-      return node.pos;
+      return {
+        position: node.pos,
+        leadingSpaces: 0,
+      };
     }
     const np = ts.getLineAndCharacterOfPosition(
       node.getSourceFile(),
@@ -94,6 +98,7 @@ function calcInlayPosition(
     );
     const fullTrivia = node.getFullText(node.getSourceFile()).slice(0, triv);
     let result = triv;
+    let leadingSpaces = 0;
     while (
       result > 0 &&
       ts.isWhiteSpaceLike(fullTrivia.charCodeAt(result - 1))
@@ -106,10 +111,15 @@ function calcInlayPosition(
         );
         if (np.character < lp.character) {
           result++;
+        } else {
+          leadingSpaces = np.character - lp.character;
         }
         break;
       }
     }
-    return node.pos + result;
+    return {
+      position: node.pos + result,
+      leadingSpaces,
+    };
   }
 }
