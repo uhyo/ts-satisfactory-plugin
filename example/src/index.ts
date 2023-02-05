@@ -26,6 +26,8 @@ function func2() {
 
 // Class field
 class A {
+  // a
+
   func = ((num) => {
     // long function...
     // long function...
@@ -38,3 +40,12 @@ class A {
     return "foo" as const;
   }) satisfies (num: number) => string;
 }
+
+// In a object literal
+const obj = {
+  // a
+
+  field: (() => {
+    return 3;
+  }) satisfies () => number,
+};

@@ -57,6 +57,18 @@ function listAllTargetNodes(
       });
     }
   }
+  if (ts.isPropertyDeclaration(node) && node.initializer) {
+    result.push({
+      target: node,
+      expression: node.initializer,
+    });
+  }
+  if (ts.isPropertyAssignment(node)) {
+    result.push({
+      target: node,
+      expression: node.initializer,
+    });
+  }
   ts.forEachChild(node, (child) => {
     if (child.end < span.start) {
       return;

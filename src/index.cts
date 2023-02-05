@@ -26,7 +26,6 @@ function tsServerPluginInit(modules: {
     const originalProvideInlayHints = proxy.provideInlayHints;
     proxy.provideInlayHints = (fileName, span, preferences) => {
       // span is range of all those source code for which inlay hints are requested
-      info.project.projectService.logger.info("Inlay!");
       const originalResult = originalProvideInlayHints(
         fileName,
         span,
