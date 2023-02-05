@@ -1,6 +1,6 @@
 {
   "name": "ts-satisfactory-plugin",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "TypeScript language plugin that satisfies you",
   "main": "dist/index.cjs",
   "type": "module",
@@ -16,6 +16,7 @@
   ],
   "author": "uhyo <uhyo@uhy.ooo>",
   "license": "MIT",
+  "repository": "github:uhyo/ts-satisfactory-plugin",
   "devDependencies": {
     "@types/node": "^18.11.18",
     "typescript": "^5.0.0-beta"
