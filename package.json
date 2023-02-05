@@ -11,6 +11,9 @@
     "typescript",
     "plugin"
   ],
+  "files": [
+    "dist"
+  ],
   "author": "uhyo <uhyo@uhy.ooo>",
   "license": "MIT",
   "devDependencies": {
