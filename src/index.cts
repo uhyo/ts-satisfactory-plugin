@@ -15,6 +15,8 @@ function tsServerPluginInit(modules: {
   return { create };
 
   function create(info: ts.server.PluginCreateInfo) {
+    const { config } = info;
+    const minLines = config.minLines ?? 1;
     const proxy: ts.LanguageService = Object.create(null);
     for (const k of Object.keys(info.languageService) as Array<
       keyof ts.LanguageService
@@ -38,7 +40,7 @@ function tsServerPluginInit(modules: {
       if (sf === undefined) {
         return originalResult;
       }
-      const inlays = getAdditionalInlays(typescript, sf, span);
+      const inlays = getAdditionalInlays(typescript, sf, span, minLines);
       return originalResult.concat(inlays);
     };
 

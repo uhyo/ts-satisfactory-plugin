@@ -14,29 +14,36 @@ type InlayTarget = {
 export function getAdditionalInlays(
   ts: typeof import("typescript/lib/tsserverlibrary.js"),
   program: SourceFile,
-  span: TextSpan
+  span: TextSpan,
+  minLines: number
 ) {
   const checkedDecls: InlayTarget[] = [];
   listAllTargetNodes(ts, program, span, checkedDecls);
-  const result: InlayHint[] = checkedDecls.flatMap((decl) => {
-    const sat = getSatisfiesConstraint(ts, decl.expression);
-    if (!sat) {
-      return [];
-    }
-    const res = calcInlayPosition(ts, decl);
-    if (res === undefined) {
-      return [];
-    }
-    const { position, leadingSpaces } = res;
-    return [
-      {
-        kind: ts.InlayHintKind.Type,
-        position,
-        text: " ".repeat(leadingSpaces) + "satisfies " + sat.getText(),
-        whitespaceAfter: true,
-      },
-    ];
-  });
+  const result: InlayHint[] = checkedDecls
+    .filter((decl) => {
+      const sl = ts.getLineAndCharacterOfPosition(program, decl.expression.pos);
+      const el = ts.getLineAndCharacterOfPosition(program, decl.expression.end);
+      return el.line - sl.line + 1 >= minLines;
+    })
+    .flatMap((decl) => {
+      const sat = getSatisfiesConstraint(ts, decl.expression);
+      if (!sat) {
+        return [];
+      }
+      const res = calcInlayPosition(ts, decl);
+      if (res === undefined) {
+        return [];
+      }
+      const { position, leadingSpaces } = res;
+      return [
+        {
+          kind: ts.InlayHintKind.Type,
+          position,
+          text: " ".repeat(leadingSpaces) + "satisfies " + sat.getText(),
+          whitespaceAfter: true,
+        },
+      ];
+    });
   return result;
 }
 

@@ -106,7 +106,10 @@
     // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
     "skipLibCheck": true,                                 /* Skip type checking all .d.ts files. */
     "plugins": [
-      {"name":"ts-satisfactory-plugin"}
+      {
+        "name":"ts-satisfactory-plugin",
+        "minLines": 1
+      }
     ]
   },
   "include": ["src"]
