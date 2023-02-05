@@ -1,6 +1,6 @@
 {
   "name": "ts-satisfactory-plugin",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "TypeScript language plugin that satisfies you",
   "main": "dist/index.cjs",
   "type": "module",

@@ -1,4 +1,4 @@
-# ts-satisfies-plugin
+# ts-satisfactory-plugin
 
 A TypeScript Language Service Plugin that satisfies you.
 
@@ -15,7 +15,7 @@ You often want to see other function interface and `satisfies` constraint at the
 Install with your package manager.
 
 ```sh
-npm i -D ts-satisfies-plugin
+npm i -D ts-satisfactory-plugin
 ```
 
 Add this plugin to your `tsconfig.json`.
@@ -26,7 +26,7 @@ Add this plugin to your `tsconfig.json`.
     // ...
     "plugins": [
       {
-        "name": "ts-satisfies-plugin"
+        "name": "ts-satisfactory-plugin"
       }
     ]
   }
@@ -40,7 +40,7 @@ Add this plugin to your `tsconfig.json`.
 ```json
 "plugins": [
   {
-    "name": "ts-satisfies-plugin",
+    "name": "ts-satisfactory-plugin",
     "minLines": 3
   }
 ]
